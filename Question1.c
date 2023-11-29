@@ -1,11 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
+#include "Questions.h"
 
-int main(int argc, char const *argv[]){
+void initialisation(void){
 	const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\nenseash\n";
 	write(1, message, strlen(message));
+}
 
-	return 0;
+int main(int argc, char const *argv[]){
+    initialisation();
+    return 0;
 }
