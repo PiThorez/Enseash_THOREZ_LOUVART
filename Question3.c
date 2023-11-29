@@ -3,22 +3,22 @@
 #define TAILLE 128
 #define TailleBuffer 512
 
-
-
-char cmd_read[TAILLE];
-ssize_t cmd_size;
-pid_t pid;
-int status;
-
-
 int main(int argc, char const *argv[]){
     
-    const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\nenseash %";
+    //Variables
+    char cmd_read[TAILLE];
+    ssize_t cmd_size;
+    pid_t pid;
+    int status;
+
+    const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\n";
 	write(STDOUT_FILENO, message, strlen(message));
 
 	while(1){
         const char *prompt = "\nenseash %";
 	    write(STDOUT_FILENO, prompt, strlen(prompt));
+
+        //User input
         cmd_size = read(STDIN_FILENO,cmd_read,TAILLE);
         cmd_read[cmd_size-1] = '\0';
 
@@ -28,10 +28,14 @@ int main(int argc, char const *argv[]){
             exit(1);
         }
 
+        //Creation of child process and checking for errors during creation 
+        //Child process is created to be sure the user can enter mutliple command without exiting the programm
         pid = fork();
         if(pid != 0){
             wait(&status);
         }
+
+        //Executing incoming commands
         else{
             if(strcmp(cmd_read,"")==0){
                 const char * message_enter = "date";
