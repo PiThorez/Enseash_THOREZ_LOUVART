@@ -23,7 +23,14 @@ int main(int argc, char const *argv[]){
             wait(&status);
         }
         else{
-            execlp(cmd_read,cmd_read,(char*)NULL);
+            if(strcmp(cmd_read,"")==0){
+                const char * message_enter = "date";
+                execlp(message_enter,message_enter,(char*)NULL);
+            }
+            else{
+                execlp(cmd_read,cmd_read,(char*)NULL);
+            }
+            
         }
 
     }
