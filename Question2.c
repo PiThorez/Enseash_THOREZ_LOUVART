@@ -12,9 +12,12 @@ int status;
 
 int main(int argc, char const *argv[]){
     
-	while(1){
-        const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\nenseash %\n";
-	    write(1, message, strlen(message));
+    const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\nenseash %\n";
+	write(1, message, strlen(message));
+	
+    while(1){
+        const char *prompt = "\nenseash %";
+	    write(STDOUT_FILENO, prompt, strlen(prompt));    
         cmd_size = read(STDOUT_FILENO,cmd_read,TAILLE);
         cmd_read[cmd_size-1] = '\0';
 
