@@ -1,6 +1,7 @@
 #include "Questions.h"
 
 #define TAILLE 128
+#define TailleBuffer 512
 
 
 
@@ -12,9 +13,12 @@ int status;
 
 int main(int argc, char const *argv[]){
     
+    const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\nenseash %";
+	write(STDOUT_FILENO, message, strlen(message));
+
 	while(1){
-        const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\nenseash %\n";
-	    write(STDOUT_FILENO, message, strlen(message));
+        const char *prompt = "\nenseash %";
+	    write(STDOUT_FILENO, prompt, strlen(prompt));
         cmd_size = read(STDIN_FILENO,cmd_read,TAILLE);
         cmd_read[cmd_size-1] = '\0';
 
