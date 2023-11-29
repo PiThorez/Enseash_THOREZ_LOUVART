@@ -16,6 +16,7 @@ int main(int argc, char const *argv[]){
         const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\nenseash %\n";
 	    write(1, message, strlen(message));
         cmd_size = read(STDOUT_FILENO,cmd_read,TAILLE);
+        cmd_read[cmd_size-1] = '\0';
 
         pid = fork();
         if(pid != 0){
