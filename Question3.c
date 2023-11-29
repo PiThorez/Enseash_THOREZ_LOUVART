@@ -22,10 +22,15 @@ int main(int argc, char const *argv[]){
         cmd_size = read(STDIN_FILENO,cmd_read,TAILLE);
         cmd_read[cmd_size-1] = '\0';
 
+        if(cmd_size==0){
+            const char * message_exit = "\n Bye Bye ...\n\n";
+            write(STDOUT_FILENO, message_exit, strlen(message_exit));
+            exit(0);
+        }
         if(strcmp(cmd_read,"exit")==0){
             const char * message_exit = "\n Bye Bye ...\n\n";
             write(STDOUT_FILENO, message_exit, strlen(message_exit));
-            exit(1);
+            exit(0);
         }
 
         //Creation of child process and checking for errors during creation 
