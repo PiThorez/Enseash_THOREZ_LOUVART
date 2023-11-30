@@ -5,14 +5,16 @@
 
 
 
-char cmd_read[TAILLE];
-ssize_t cmd_size;
-pid_t pid;
-int status;
-char Buffer[TailleBuffer];
 
 
 int main(int argc, char const *argv[]){
+
+    //Variables
+    char cmd_read[TAILLE];
+    ssize_t cmd_size;
+    pid_t pid;
+    int status;
+    char Buffer[TailleBuffer];
     
     const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\nenseash %";
 	write(STDOUT_FILENO, message, strlen(message));
@@ -20,6 +22,8 @@ int main(int argc, char const *argv[]){
 	while(1){
         //const char *prompt = "\nenseash%";
 	    //write(STDOUT_FILENO, prompt, strlen(prompt));
+
+        //User input
         cmd_size = read(STDIN_FILENO,cmd_read,TAILLE);
         cmd_read[cmd_size-1] = '\0';
 
@@ -29,17 +33,21 @@ int main(int argc, char const *argv[]){
             exit(1);
         }
 
+        //Creation of child process and checking for errors during creation 
+        //Child process is created to be sure the user can enter mutliple command without exiting the programm
         pid = fork();
         if(pid != 0){
             wait(&status);
-            if(WIFEXITED(status)){
-                sprintf(Buffer,"enseash [exit : %d] %%", WEXITSTATUS(status));
+            if(WIFEXITED(status)){                                                  //If we have an exit code :
+                sprintf(Buffer,"enseash [exit : %d] %%", WEXITSTATUS(status));      //Then we go back on the initial prompt with the exit code
                 write(STDIN_FILENO,Buffer,strlen(Buffer));
-            } else if (WIFSIGNALED(status)){
-                sprintf(Buffer,"enseash [exit : %d] %%", WEXITSTATUS(status));
+            } else if (WIFSIGNALED(status)){                                        //If we have a signal code :
+                sprintf(Buffer,"enseash [exit : %d] %%", WEXITSTATUS(status));      //Then we go back on the initial prompt with the signal code
                 write(STDIN_FILENO,Buffer,strlen(Buffer));
             }
         }
+
+        //Executing incoming commands
         else{
             if(strcmp(cmd_read,"")==0){
                 const char * message_enter = "date";
