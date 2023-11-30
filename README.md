@@ -28,3 +28,11 @@ Question 3
     Pour faire un exit en tapant "exit" ou en faisant CTRL+D, il faut se placer avant le fork() sinon un des processus reviendra au prompt "enseash%". De plus, pour reconnaitre si CTRL+D est pressé, il faut regarder quand cmd_size = 0.
 
 ![Capture question 2](Images/question3.png)
+
+Question 4
+ 
+    Pour afficher le code de retour de la commande précédente, on se sert du statut pour récupérer cette valeur.
+
+Question 5 
+
+    On affiche en complément le temps d'exécution de la commande à l'aide de la fonction clock_gettime.
