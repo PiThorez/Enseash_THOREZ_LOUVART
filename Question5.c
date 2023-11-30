@@ -2,6 +2,7 @@
 
 #define TAILLE 128
 #define TailleBuffer 512
+#define ConversionNtoM 1000000
 
 
 
@@ -17,9 +18,10 @@ int main(int argc, char const *argv[]){
     char Buffer[TailleBuffer];
     
     const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\nenseash %";
-	write(STDOUT_FILENO, message, strlen(message));
+	write(STDIN_FILENO, message, strlen(message));
 
 	while(1){
+
         //const char *prompt = "\nenseash%";
 	    //write(STDOUT_FILENO, prompt, strlen(prompt));
 
@@ -29,21 +31,24 @@ int main(int argc, char const *argv[]){
 
         if(strcmp(cmd_read,"exit")==0 | cmd_size==0){
             const char * message_exit = "\n Bye Bye ...\n\n";
-            write(STDIN_FILENO, message_exit, strlen(message_exit));
+            write(STDOUT_FILENO, message_exit, strlen(message_exit));
             exit(1);
         }
 
+        struct timespec start, end;
+        clock_gettime(CLOCK_REALTIME,&start);
         //Creation of child process and checking for errors during creation 
         //Child process is created to be sure the user can enter mutliple command without exiting the programm
         pid = fork();
         if(pid != 0){
             wait(&status);
-            if(WIFEXITED(status)){                                                  //If we have an exit code :
-                sprintf(Buffer,"enseash [exit : %d] %%", WEXITSTATUS(status));      //Then we go back on the initial prompt with the exit code
-                write(STDIN_FILENO,Buffer,strlen(Buffer));
-            } else if (WIFSIGNALED(status)){                                        //If we have a signal code :
-                sprintf(Buffer,"enseash [exit : %d] %%", WEXITSTATUS(status));      //Then we go back on the initial prompt with the signal code
-                write(STDIN_FILENO,Buffer,strlen(Buffer));
+            clock_gettime(CLOCK_REALTIME,&end);
+            if(WIFEXITED(status)){                                                                                                      //If we have an exit code :
+                sprintf(Buffer,"enseash [exit : %d | %dms] %%", WEXITSTATUS(status),((end.tv_nsec - start.tv_nsec)/ConversionNtoM));    //Then we go back on the initial prompt with the exit code and we take the value of the clock (conversion made here)
+                write(STDOUT_FILENO,Buffer,strlen(Buffer));
+            } else if (WIFSIGNALED(status)){                                                                                            //If we have a signal code :
+                sprintf(Buffer,"enseash [exit : %d | %dms] %%", WEXITSTATUS(status),((end.tv_nsec - start.tv_nsec)/ConversionNtoM));    //Then we go back on the initial prompt with the signal code and we take the value of the clock (conversion made here)
+                write(STDOUT_FILENO,Buffer,strlen(Buffer));
             }
         }
 

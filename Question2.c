@@ -11,15 +11,19 @@ int main(int argc, char const *argv[]){
     pid_t pid;
     int status;
     
-    const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\nenseash %\n";
-	write(1, message, strlen(message));
+    const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.";
+	write(STDIN_FILENO, message, strlen(message));
 	
     while(1){
         const char *prompt = "\nenseash %";
-	    write(STDOUT_FILENO, prompt, strlen(prompt));    
+	    write(STDIN_FILENO, prompt, strlen(prompt));    
         cmd_size = read(STDOUT_FILENO,cmd_read,TAILLE);
         cmd_read[cmd_size-1] = '\0';
 
+
+
+        //Creation of child process and checking for errors during creation 
+        //Child process is created to be sure the user can enter mutliple command without exiting the programm
         pid = fork();
         if(pid != 0){
             wait(&status);

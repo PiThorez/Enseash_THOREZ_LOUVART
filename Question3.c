@@ -12,20 +12,20 @@ int main(int argc, char const *argv[]){
     int status;
 
     const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\n";
-	write(STDOUT_FILENO, message, strlen(message));
+	write(STDIN_FILENO, message, strlen(message));
 
 	while(1){
         const char *prompt = "\nenseash %";
-	    write(STDOUT_FILENO, prompt, strlen(prompt));
+	    write(STDIN_FILENO, prompt, strlen(prompt));
 
         //User input
-        cmd_size = read(STDIN_FILENO,cmd_read,TAILLE);
+        cmd_size = read(STDOUT_FILENO,cmd_read,TAILLE);
         cmd_read[cmd_size-1] = '\0';
 
                                                           
         if(strcmp(cmd_read,"exit")==0 | cmd_size==0){                   //cmd_size == 0  correspond à un CTRL+D
             const char * message_exit = "\n Bye Bye ...\n\n";
-            write(STDOUT_FILENO, message_exit, strlen(message_exit));
+            write(STDIN_FILENO, message_exit, strlen(message_exit));
             exit(1);
         }
 
