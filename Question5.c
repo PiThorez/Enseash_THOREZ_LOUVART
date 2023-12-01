@@ -44,10 +44,10 @@ int main(int argc, char const *argv[]){
             wait(&status);
             clock_gettime(CLOCK_REALTIME,&end);
             if(WIFEXITED(status)){                                                                                                      //If we have an exit code :
-                sprintf(Buffer,"enseash [exit : %d | %dms] %%", WEXITSTATUS(status),((end.tv_nsec - start.tv_nsec)/ConversionNtoM));    //Then we go back on the initial prompt with the exit code and we take the value of the clock (conversion made here)
+                sprintf(Buffer,"enseash [exit : %d | %ldms] %%", WEXITSTATUS(status),((end.tv_nsec - start.tv_nsec)/ConversionNtoM));    //Then we go back on the initial prompt with the exit code and we take the value of the clock (conversion made here)
                 write(STDOUT_FILENO,Buffer,strlen(Buffer));
             } else if (WIFSIGNALED(status)){                                                                                            //If we have a signal code :
-                sprintf(Buffer,"enseash [exit : %d | %dms] %%", WEXITSTATUS(status),((end.tv_nsec - start.tv_nsec)/ConversionNtoM));    //Then we go back on the initial prompt with the signal code and we take the value of the clock (conversion made here)
+                sprintf(Buffer,"enseash [sig : %d | %ldms] %%", WTERMSIG(status),((end.tv_nsec - start.tv_nsec)/ConversionNtoM));    //Then we go back on the initial prompt with the signal code and we take the value of the clock (conversion made here)
                 write(STDOUT_FILENO,Buffer,strlen(Buffer));
             }
         }
@@ -57,10 +57,10 @@ int main(int argc, char const *argv[]){
             if(strcmp(cmd_read,"")==0){
                 const char * message_enter = "date";
                 execlp(message_enter,message_enter,(char*)NULL);
-                exit(58);
             }
             else{
                 execlp(cmd_read,cmd_read,(char*)NULL);
+                exit(150);
             }
             
         }

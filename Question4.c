@@ -42,7 +42,7 @@ int main(int argc, char const *argv[]){
                 sprintf(Buffer,"enseash [exit : %d] %%", WEXITSTATUS(status));      //Then we go back on the initial prompt with the exit code
                 write(STDIN_FILENO,Buffer,strlen(Buffer));
             } else if (WIFSIGNALED(status)){                                        //If we have a signal code :
-                sprintf(Buffer,"enseash [exit : %d] %%", WEXITSTATUS(status));      //Then we go back on the initial prompt with the signal code
+                sprintf(Buffer,"enseash [sig : %d] %%", WTERMSIG(status));      //Then we go back on the initial prompt with the signal code
                 write(STDIN_FILENO,Buffer,strlen(Buffer));
             }
         }
@@ -52,10 +52,10 @@ int main(int argc, char const *argv[]){
             if(strcmp(cmd_read,"")==0){
                 const char * message_enter = "date";
                 execlp(message_enter,message_enter,(char*)NULL);
-                exit(58);
             }
             else{
                 execlp(cmd_read,cmd_read,(char*)NULL);
+                exit(150);
             }
             
         }
