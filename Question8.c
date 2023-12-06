@@ -47,10 +47,10 @@ int main(int argc, char const *argv[]) {
         } else {
             char *commands[TAILLE];
             int command_count = 0;
-            char *token = strtok(cmd_read, "|");
-            while (token != NULL) {
-                commands[command_count++] = token;
-                token = strtok(NULL, "|");
+            char *pipe_token = strtok(cmd_read, "|");
+            while (pipe_token != NULL) {
+                commands[command_count++] = pipe_token;
+                pipe_token = strtok(NULL, "|");
             }
 
             int pipes[2];
@@ -85,10 +85,10 @@ int main(int argc, char const *argv[]) {
 
             char *args[TAILLE];
             int i = 0;
-            char *cmd_token = strtok(commands[command_count - 1], " ");
-            while (cmd_token != NULL) {
-                args[i++] = cmd_token;
-                cmd_token = strtok(NULL, " ");
+            char *token = strtok(commands[command_count - 1], " ");
+            while (token != NULL) {
+                args[i++] = token;
+                token = strtok(NULL, " ");
             }
             args[i] = NULL;
 

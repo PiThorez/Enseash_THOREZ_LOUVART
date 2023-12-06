@@ -40,3 +40,22 @@ Question 5
     On affiche en complément le temps d'exécution de la commande à l'aide de la fonction clock_gettime.
 
 ![Capture question 5](Images/question5.png)
+
+
+Question 6
+
+    Pour repérer si un argument est présent, on regarde s'il y a un espace " " dans la chaine envoyée par l'utilisateur puis on exécute la commande avec l'argument.
+
+![Capture question 6](Images/question6.png)
+
+Question 7
+
+    Pour gérer les redirections avec '<' et '>', on utilise la fonction dup2
+
+![Capture question 7](Images/question7.png)
+
+Question 8
+
+
+
+![Capture question 8](Image/question8.png)
