@@ -1,3 +1,7 @@
+Le fichier test1 sert à afficher une autre valeur de fin de code (exit).
+Le fichier test2 contient une fonction qui génère une erreur de segmentation, ce qui nous permet de tester si l'on différencie bien la fin d'un programme avec une exit ou un signal.
+Le fichier test3 contient une fonction qui permet de faire attendre le programme pendant 100ms, pour tester si notre temps d'execution affiche était cohérent.
+
 Question 1
 
     On utilise la fonction "write". Ces arguments sont : 
