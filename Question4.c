@@ -16,7 +16,7 @@ int main(int argc, char const *argv[]){
     int status;
     char Buffer[TailleBuffer];
     
-    const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\nenseash %";
+    const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\nenseash % ";
 	write(STDOUT_FILENO, message, strlen(message));
 
 	while(1){
@@ -39,10 +39,10 @@ int main(int argc, char const *argv[]){
         if(pid != 0){
             wait(&status);
             if(WIFEXITED(status)){                                                  //If we have an exit code :
-                sprintf(Buffer,"enseash [exit : %d] %%", WEXITSTATUS(status));      //Then we go back on the initial prompt with the exit code
+                sprintf(Buffer,"enseash [exit : %d] %% ", WEXITSTATUS(status));      //Then we go back on the initial prompt with the exit code
                 write(STDIN_FILENO,Buffer,strlen(Buffer));
             } else if (WIFSIGNALED(status)){                                        //If we have a signal code :
-                sprintf(Buffer,"enseash [sig : %d] %%", WTERMSIG(status));      //Then we go back on the initial prompt with the signal code
+                sprintf(Buffer,"enseash [sig : %d] %% ", WTERMSIG(status));      //Then we go back on the initial prompt with the signal code
                 write(STDIN_FILENO,Buffer,strlen(Buffer));
             }
         }

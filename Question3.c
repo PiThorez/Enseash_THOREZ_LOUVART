@@ -15,7 +15,7 @@ int main(int argc, char const *argv[]){
 	write(STDIN_FILENO, message, strlen(message));
 
 	while(1){
-        const char *prompt = "\nenseash %";
+        const char *prompt = "\nenseash % ";
 	    write(STDIN_FILENO, prompt, strlen(prompt));
 
         //User input

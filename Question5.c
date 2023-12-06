@@ -17,7 +17,7 @@ int main(int argc, char const *argv[]){
     int status;
     char Buffer[TailleBuffer];
     
-    const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\nenseash %";
+    const char *message = "\nBienvenue dans le Shell ENSEA.\nPour quitter, tapez 'exit'.\nenseash % ";
 	write(STDIN_FILENO, message, strlen(message));
 
 	while(1){
@@ -44,10 +44,10 @@ int main(int argc, char const *argv[]){
             wait(&status);
             clock_gettime(CLOCK_REALTIME,&end);
             if(WIFEXITED(status)){                                                                                                      //If we have an exit code :
-                sprintf(Buffer,"enseash [exit : %d | %ldms] %%", WEXITSTATUS(status),((end.tv_nsec - start.tv_nsec)/ConversionNtoM));    //Then we go back on the initial prompt with the exit code and we take the value of the clock (conversion made here)
+                sprintf(Buffer,"enseash [exit : %d | %ld ms] %% ", WEXITSTATUS(status),((end.tv_nsec - start.tv_nsec)/ConversionNtoM));   //Then we go back on the initial prompt with the exit code and we take the value of the clock (conversion made here)
                 write(STDOUT_FILENO,Buffer,strlen(Buffer));
             } else if (WIFSIGNALED(status)){                                                                                            //If we have a signal code :
-                sprintf(Buffer,"enseash [sig : %d | %ldms] %%", WTERMSIG(status),((end.tv_nsec - start.tv_nsec)/ConversionNtoM));    //Then we go back on the initial prompt with the signal code and we take the value of the clock (conversion made here)
+                sprintf(Buffer,"enseash [sig : %d | %ld ms] %% ", WTERMSIG(status),((end.tv_nsec - start.tv_nsec)/ConversionNtoM));       //Then we go back on the initial prompt with the signal code and we take the value of the clock (conversion made here)
                 write(STDOUT_FILENO,Buffer,strlen(Buffer));
             }
         }
