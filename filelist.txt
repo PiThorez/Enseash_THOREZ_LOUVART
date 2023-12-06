@@ -6,6 +6,7 @@ Question4.c
 Question5.c
 Question6.c
 Question7.c
+Question8.c
 Questions.h
 README.md
 filelist.txt
@@ -16,6 +17,7 @@ question4
 question5
 question6
 question7
+question8
 test1
 test1.c
 test2
