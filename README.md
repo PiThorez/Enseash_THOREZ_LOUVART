@@ -1,9 +1,3 @@
-Fichiers test :
-
-Le fichier test1 sert à afficher une autre valeur de fin de code (exit).
-Le fichier test2 contient une fonction qui génère une erreur de segmentation, ce qui nous permet de tester si l'on différencie bien la fin d'un programme avec une exit ou un signal.
-Le fichier test3 contient une fonction qui permet de faire attendre le programme pendant 100ms, pour tester si notre temps d'execution affiche était cohérent.
-
 Question 1
 
     On utilise la fonction "write". Ces arguments sont : 
@@ -62,6 +56,6 @@ Question 7
 
 Question 8
 
+    Pour gérer les redirections avec '|', il faut légèrement modifier ce qu'on a à la question 6 pour qu'il n'y ait pas de conflit entre la lecture d'un espace pour un argument et la lecture d'un '|', on met donc le test de la lecture de '|' avant celle de l'espace. Sinon les redirections avec '|' sont similaires aux '<' '>' avec un fork en plus pour traiter les deux commandes.
 
-
-![Capture question 8](Image/question8.png)
+![Capture question 8](Images/question8.png)
